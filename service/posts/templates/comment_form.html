@@ -1,0 +1,16 @@
+{% extends 'forum/base.html' %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="container mb-3 col-sm-7">
+      <h2>Add comment</h2>
+      <br>
+      <input type="text" name="{{ form.text.name }}" value="{{ form.text.value }}" class="form-control mb-3" placeholder="Add a comment">
+      <br>
+      <input type="number" name="{{ form.rating.name }}" value="{{ form.rating.value }}" class="form-control mb-3" placeholder="Add a comment">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+
+{% endblock %}

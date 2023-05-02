@@ -1,0 +1,50 @@
+{% extends 'forum/base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+    <div class="album py-5 bg-light container" >
+        {% if user.is_superuser %}
+            <div class="container-fluid py-5">
+                <h1>{{ post.school_name }}</h1>
+                <p>{{ post.website }}</p>
+                <p>Author: {{ post.author }}</p>
+                <p>Created: {{ post.created_at }}</p>
+                <p>Created: {{ post.your_email }}</p>
+                <p>Average rating: {{ average_rating }}</p>
+            </div>
+        {% else %}
+            <h1>{{ post.school_name }}</h1>
+            <p>{{ post.website }}</p>
+        {% endif %}
+        <hr>
+        {% for comment, rate in comments|zip_lists:rating %}
+            {% if user.is_superuser %}
+                <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
+                    <div class="list-group-item rounded-3 py-3">
+                        <h2><p>Rating: {{ rate.0 }}</p></h2>
+                                <p>{{ comment.text }}</p>
+                        <p>{{ comment.author }} | {{comment.created_at}}</p>
+                        <span class="d-block small opacity-50">{{ comment.text }}</span>
+                    </div>
+                </div>
+            {% else %}
+            <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
+                <div class="list-group-item rounded-3 py-3">
+                    <h2>{{ comment.score }}</h2>
+                    <p>{{ comment.author }}</p>
+                    <span class="d-block small opacity-50">{{ comment.text }}</span>
+
+                </div>
+            </div>
+            {% endif %}
+            {% empty %}
+            <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
+                <div class="list-group-item rounded-3 py-3">
+                    <span class="d-block small">No comments yet.</span>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'forum/base.html' %}
+
+{% block content %}
+  <br>
+  <form method="post">
+    {% csrf_token %}
+    <div class="container mb-3 col-sm-7">
+      <h2>Новый пост</h2>
+      <br>
+      <input type="text" name="{{ form.school_name.name }}" value="{{ form.school_name.value }}" class="form-control mb-3" placeholder="Enter school name here">
+      <input type="text" name="{{ form.country.name }}" value="{{ form.country.value }}" class="form-control mb-3" placeholder="Enter country here">
+      <input type="text" name="{{ form.city.name }}" value="{{ form.city.value }}" class="form-control mb-3" placeholder="Enter city here">
+      <input type="text" name="{{ form.website.name }}" value="{{ form.website.value }}" class="form-control mb-3" placeholder="Enter website here">
+      <input type="text" name="{{ form.your_email.name }}" value="{{ form.your_email.value }}" class="form-control   mb-3" placeholder="Enter your email here">
+      <button type="submit" class="btn btn-dark col-5 row">Опубликовать</button>
+    </div>
+
+  </form>
+{% endblock %}

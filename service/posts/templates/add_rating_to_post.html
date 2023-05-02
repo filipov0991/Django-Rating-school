@@ -1,0 +1,115 @@
+{% extends 'forum/base.html' %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <!-- <div class="container mb-3 col-sm-7">
+        <input type="range" class="form-range" min="0" max="5" id="customRange2" name="{{ form.rating.name }}" value="{{ form.rating.value }}">
+        <button type="submit">Submit</button>
+    </div> -->
+
+
+
+    <div class="container container mb-3 col-sm-7"><div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <div class="range-slider">
+                <input type="range" value="1" min="1" max="5" name="{{ form.rating.name }}" value="{{ form.rating.value }}">
+                <span class="range-value">1</span>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>   
+        </div>
+    </div>
+
+  </form>
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" /> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <style>
+
+    .range-slider{ margin: 30px 0 0 0; }
+    .range-slider input[type="range"]{
+    background: #fff;
+    width: calc(100% - (85px));
+    height: 29px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    float: left;
+    position: relative;
+    }
+    .range-slider input[type="range"]::-webkit-slider-thumb{
+    background: #161416;
+    width: 7px;
+    height: 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out 0s;
+    -webkit-appearance: none;
+    appearance: none;
+    }
+
+    .range-slider input[type="range"]::-webkit-slider-thumb:hover,
+    .range-slider input[type="range"]:active::-webkit-slider-thumb{
+    width: 9px;
+    box-shadow: 0 0 2px #fff inset, 0 0 1px #ddd;
+    }
+
+    .range-slider input[type="range"]::-moz-range-thumb{
+    background: #131014;
+    width: 7px;
+    height: 30px;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    transition: all 0.15s ease-in-out 0s;
+    }
+
+    .range-slider input[type="range"]::-moz-range-thumb:hover,
+    .range-slider input[type="range"]:active::-moz-range-thumb{
+    width: 9px;
+    box-shadow: 0 0 3px #fff inset, 0 0 1px #ddd;
+    }
+
+    .range-slider .range-value{
+    color: #fff;
+    background: #18111b;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 45px;
+    width: 45px;
+    height: 45px;
+    margin-left: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: -9px;
+    }
+    ::-moz-range-track{
+    background: transparent;
+    border: 0;
+    }
+    </style>
+
+
+    <script>
+    $(document).ready(function(){
+    var rangeSlider = function(){
+    var slider = $('.range-slider'),
+    range = $('.range-slider input[type="range"]'),
+    value = $('.range-value');
+    slider.each(function(){
+    value.each(function(){
+    var value = $(this).prev().attr('value');
+    $(this).html(value);
+    });
+    range.on('input', function(){
+    $(this).next(value).html(this.value);
+    });
+    });
+    };
+    rangeSlider();
+    });
+    </script>
+{% endblock %}

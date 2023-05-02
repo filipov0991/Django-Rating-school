@@ -1,0 +1,42 @@
+{% extends 'forum/base.html' %}
+
+{% block content %}
+  {% for post in posts %}
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+            <div class="col">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  {% if user.is_superuser %}
+                    <a class="nav-link px-2 text-muted" href="{% url 'posts:post_detail' post.id %}">
+                      <h2>{{ post.school_name }}</h2>
+                      <p>Автор: {{ post.author }}</p>
+                      <p>Опубликовано: {{ post.created_at }}</p>
+                      <p>Обновлено: {{ post.updated_at }}</p>
+                      <p>Average rating: {{ post_rating }}</p>
+                      <a class="container" href="{% url 'posts:post_edit' post.id %}">Редактировать</a>
+                      <a href="{% url 'posts:post_delete' post.id %}">Удалить</a>
+                    </a>
+                  {% else %}
+                    <a class="nav-link px-2 text-muted" href="{% url 'posts:post_detail' post.id %}">
+                      <h2>{{ post.school_name }}</h2>
+                    </a>
+                  {% endif %}
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  <br>
+  <div class="container text-center">
+    <p>Don't see the school you're looking for?</p>
+    <a type="button" class="btn btn-dark" href="{% url 'posts:post_create' %}">Add school</a>
+  </div>
+  
+{% endblock %}
